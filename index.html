@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Handtris — тетрис руками</title>
+  <meta name="description" content="Тетрис, которым управляют руками через веб-камеру. Admit Hackathon, кейс Motion." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="logo"><span class="tile">H</span><span class="tile float">T</span><span class="name">handtris</span></div>
+    <div class="chips">
+      <button class="chip btn-chip" id="calibBtn" hidden>⟳ Калибровка</button>
+      <button class="chip btn-chip" id="voiceBtn">🔊 Голос</button>
+      <span class="chip" id="chipMode">режим: —</span>
+      <span class="chip" id="chipHand">рука: —</span>
+      <span class="chip" id="chipPinch">щипок: —</span>
+      <span class="chip" id="chipAngle">кисть: —</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="stage-col">
+      <div class="stage-wrap">
+        <video id="video" playsinline muted></video>
+        <canvas id="stage"></canvas>
+        <div id="cursor" hidden></div>
+      <div class="overlay" id="overlay">
+        <div class="ov-card" id="ovCard">
+          <h1>Тетрис руками</h1>
+          <p>Бери фигуры пальцами и ставь их на место — как настоящие кубики. А знак ✌️ отключает гравитацию.</p>
+          <button id="startBtn" class="btn">Включить камеру</button>
+          <p class="muted small">Камера работает только у тебя в браузере, видео никуда не отправляется.</p>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <aside class="panel side">
+      <div class="coach" id="coach">
+        <div class="coach-label">Тренер</div>
+        <div class="coach-text" id="coachText">Встань так, чтобы рука была видна в кадре</div>
+      </div>
+
+      <div class="stats">
+        <div><span class="k">Счёт</span><span class="v" id="score">0</span></div>
+        <div><span class="k">Линии</span><span class="v" id="lines">0</span></div>
+        <div><span class="k">Уровень</span><span class="v" id="level">1</span></div>
+      </div>
+
+      <div class="anti" id="anti">
+        <div class="anti-head">
+          <span class="k">Антигравитация</span>
+          <span class="anti-cells" id="antiCells"></span>
+        </div>
+        <div class="anti-text" id="antiText">Покажи ✌️ на полсекунды, чтобы включить</div>
+        <div class="anti-progress"></div>
+      </div>
+
+      <div class="next card">
+        <span class="k">Следующая</span>
+        <canvas id="nextCanvas" width="160" height="160" style="width: 80px; height: 80px"></canvas>
+      </div>
+
+      <div class="legend card">
+        <span class="k">Управление</span>
+        <div><b>Щипок</b><span>взять фигуру</span></div>
+        <div><b>Рука в щипке</b><span>вести</span></div>
+        <div><b>Разжать пальцы</b><span>отпустить</span></div>
+        <div><b>Щипок двумя руками</b><span>руль</span></div>
+        <div><b>Вторая: ✌️</b><span>антигравитация</span></div>
+        <div><b>Вторая: кулак</b><span>пауза</span></div>
+        <div><b>Ладонь</b><span>старт</span></div>
+        <div><b>Указательные ✕</b><span>в меню</span></div>
+      </div>
+      <div class="records card">
+        <span class="k">Твои рекорды</span>
+        <ol id="records"></ol>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
